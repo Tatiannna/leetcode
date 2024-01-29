@@ -7,21 +7,37 @@
  * @return {number[][]}
  */
 var merge = function(intervals) {
-    let ans = [];
-    let i = 0;
+
+//     let ans = [];
+//     let i = 0;
     
-    while( i < intervals.length){
-        if (intervals[i][intervals[i].length - 1] < intervals[i+1][0]){
-            ans.push(intervals[i])
-            i++;
-        }else{
-            ans.push([intervals[i][0]]);
-            while(intervals[i][intervals[i].length - 1] >= intervals[i+1][0]){
-                i++;
-            }
-            ans[ans.length-1].push(intervals[i][0])
-        }
-        i++;
+//     while( i < intervals.length){
+//         if (intervals[i][intervals[i].length - 1] < intervals[i+1][0]){
+//             ans.push(intervals[i])
+//             i++;
+//         }else{
+//             ans.push([intervals[i][0]]);
+//             while(intervals[i][intervals[i].length - 1] >= intervals[i+1][0]){
+//                 i++;
+//             }
+//             ans[ans.length-1].push(intervals[i][0])
+//         }
+//         i++;
+//     }
+
+    let ans = [intervals[0]];
+        
+    for (let i = 0; i < intervals.length; i++){
+        if(ans[ans.length-1][1] < [intervals[i][0]]) ans.push(intervals[i])
+        else ans[ans.length-1][1] = intervals[i][1]
     }
+
     return ans;
+//     return ans;
+
 };
+
+
+
+
+
