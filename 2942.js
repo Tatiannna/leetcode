@@ -1,0 +1,24 @@
+// You are given a 0-indexed array of strings words and a character x.
+
+// Return an array of indices representing the words that contain the character x.
+
+// Note that the returned array may be in any order.
+
+
+// https://leetcode.com/problems/find-words-containing-character/
+
+
+/**
+ * @param {string[]} words
+ * @param {character} x
+ * @return {number[]}
+ */
+var findWordsContaining = function(words, x) {
+    let ans = [];
+    
+    for (let i = 0; i < words.length; i++){
+        if (words[i].includes(x)) ans.push(i)
+    }
+    
+    return ans;
+};
