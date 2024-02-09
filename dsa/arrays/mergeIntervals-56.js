@@ -6,35 +6,21 @@
  * @param {number[][]} intervals
  * @return {number[][]}
  */
+
+
 var merge = function(intervals) {
+    intervals.sort((a, b) => a[0] - b[0])
+    let stack = [intervals[0]];
 
-//     let ans = [];
-//     let i = 0;
+    for (let i = 1; i < intervals.length; i++){
+        if (intervals[i][0] <= stack[stack.length-1][1] && intervals[i][1] >= stack[stack.length-1][1] ){
+            stack[stack.length-1][1] = intervals[i][1]
+        }else if (intervals[i][0] > stack[stack.length-1][1]){
+            stack.push(intervals[i])
+        }
+    }       
     
-//     while( i < intervals.length){
-//         if (intervals[i][intervals[i].length - 1] < intervals[i+1][0]){
-//             ans.push(intervals[i])
-//             i++;
-//         }else{
-//             ans.push([intervals[i][0]]);
-//             while(intervals[i][intervals[i].length - 1] >= intervals[i+1][0]){
-//                 i++;
-//             }
-//             ans[ans.length-1].push(intervals[i][0])
-//         }
-//         i++;
-//     }
-
-    let ans = [intervals[0]];
-        
-    for (let i = 0; i < intervals.length; i++){
-        if(ans[ans.length-1][1] < [intervals[i][0]]) ans.push(intervals[i])
-        else ans[ans.length-1][1] = intervals[i][1]
-    }
-
-    return ans;
-//     return ans;
-
+    return stack;
 };
 
 
