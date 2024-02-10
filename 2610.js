@@ -18,6 +18,11 @@
  * @param {number[]} nums
  * @return {number[][]}
  */
+/**
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+
 var findMatrix = function(nums) {
     let n = {}
     let ans = [[]]
@@ -25,9 +30,9 @@ var findMatrix = function(nums) {
     for(let i = 0; i < nums.length; i++){
         if( n[nums[i]] === undefined){
             ans[0].push(nums[i])
-            n[i] = 1
+            n[nums[i]] = 1
         }else{
-            if (ans.length === n[i]) ans.push([nums[i]]);
+            if (ans.length === n[nums[i]]) ans.push([nums[i]]);
             else ans[n[nums[i]]].push(nums[i])
             n[nums[i]] += 1
         }
