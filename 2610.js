@@ -18,10 +18,6 @@
  * @param {number[]} nums
  * @return {number[][]}
  */
-/**
- * @param {number[]} nums
- * @return {number[][]}
- */
 
 var findMatrix = function(nums) {
     let n = {}
