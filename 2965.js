@@ -11,14 +11,13 @@
  * @return {number[]}
  */
 var findMissingAndRepeatedValues = function(grid) {
-    let missing;
-    let repeated;
-    let map = {};
+    let missing, repeated;
+    let set = new Set();
     
     for(let i = 0; i < grid.length; i++){
         for(let j = 0; j < grid.length; j++){
-            if(map[grid[i][j]] === undefined){
-                map[grid[i][j]] = true
+            if(!set.has(grid[i][j])){
+                set.add(grid[i][j])
             }else{
                 repeated = grid[i][j]
             }
@@ -26,7 +25,7 @@ var findMissingAndRepeatedValues = function(grid) {
     }
     
     for(let i = 1; i <= grid.length ** 2; i++){
-        if(map[i] === undefined) missing = i;
+        if(!set.has(i)) missing = i;
     }
     
     return [ repeated, missing]
