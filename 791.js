@@ -13,29 +13,15 @@
  * @return {string}
  */
 var customSortString = function(order, s) {
-    
-    //     let map = {}
-           let ans = ''
-           let extra = ''
-            
-        
-    //     for(let i = 0; i < s.length; i++){
-    //         if (map[s[i]] === undefined) map[s[i]] == 1
-    //         else map[s[i]]++
-    //     }
-        
-    //     for(let i = 0; i < order.length; i++){
-    //         if()
-    //     }
-        
-        for(let i = 0; i < order.length; i++){
-            if(s.includes(order[i])){
-                ans += order[i]
-                s.replace(order[i],'')
-            }
-            // extra += order[i]
-        }
-        console.log(ans, extra)
-        return ans + s
-        
-    };
+    let ans = ''
+    let extra = ''
+ 
+ for(let i = 0; i < order.length; i++){
+     while(s.includes(order[i])){
+         ans += order[i]
+         s = s.replace(order[i],'')
+     }
+ }
+ 
+ return ans + s
+};
