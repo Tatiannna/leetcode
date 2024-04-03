@@ -17,14 +17,24 @@
 var findContentChildren = function(g, s) {
     
 
-    //s.sort((a,b) => a - b)
+    s.sort((a,b) => a - b)
+    g.sort((a,b) => a - b)
 
-    for(let i = 0; i < g.length && i < s.length; i++){
-        if(g[i] > s[i]) return i
-        else if (i === g.length-1) return g.length
+    let count = 0;
+    let cookie = 0;
+    let wanted = 0;
+
+    while(cookie < s.length && wanted < g.length){
+        while(s[cookie] < g[wanted]){
+            cookie++;
+        }
+        if(s[cookie] >= g[wanted]){
+            count++
+            wanted++
+            cookie++
+        }
     }
 
-    return 0;
+    return count;
 };
-
 
