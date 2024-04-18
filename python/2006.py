@@ -10,9 +10,6 @@
 
 # https://leetcode.com/problems/count-number-of-pairs-with-absolute-difference-k/
 
-
-
-
 class Solution:
     def countKDifference(self, nums: List[int], k: int) -> int:
         
