@@ -7,16 +7,18 @@
 # For example, for the integer 10921, the separation of its digits is [1,0,9,2,1].
 
 # todo
+
+
 class Solution:
-    def separateDigits(self, nums: List[int]) -> List[int]:
-        ans = []
+    def minOperations(self, nums: List[int]) -> int:
 
-        for num in nums:
-            if num >= 10:
-                l = list(str(num))
-                while len(l) > 0:
-                    ans.append(int(l.pop(0)))
-            else:
-                ans.append(num)
+        count = 0
 
-        return ans
+        for i in range(1, len(nums)):
+            if nums[i-1] >= nums[i]:
+                val = nums[i-1] - nums[i] + 1
+                count += val
+                nums[i] += val
+
+        return count
+        
