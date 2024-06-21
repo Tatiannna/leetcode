@@ -11,8 +11,6 @@
 # Return the modified image after performing the flood fill.
 
 
-# todo 
-
 class Solution:
     
     def getNeighbors(self, pair, image, originalColor):
@@ -39,15 +37,21 @@ class Solution:
 
         queue = [(sr, sc)]
         originalColor = image[sr][sc]
+        visited = set()
 
 
         while (len(queue) > 0):
-            currentX, currentY = queue.pop(0)
-            image[currentX][currentY] = color
+            current = queue.pop(0)
+            row, col = current
+            visited.add(current)
+            image[row][col] = color
 
-            neighbors = self.getNeighbors((currentX, currentY), image, originalColor)
+            neighbors = self.getNeighbors(current, image, originalColor)
 
             for neighbor in neighbors:
-                queue.append(neighbor)
-
+                if neighbor not in visited:
+                    nx, ny = neighbor
+                    image[nx][ny] = color
+                    queue.append(neighbor)
+            
         return image
