@@ -7,10 +7,15 @@
 # The island doesn't have "lakes", meaning the water inside isn't connected to the water around the island. One cell is a square with side length 1. 
 # The grid is rectangular, width and height don't exceed 100. Determine the perimeter of the island.
 
-# todo
 
 class Solution:
 
+    def getStart(self, grid):
+        for i in range(len(grid)):
+            for j in range(len(grid[0])):
+                if grid[i][j] == 1:
+                    return (i,j)
+    
     def getNeighbors(self, point, grid):
         neighbors = []
         row, col = point
@@ -28,35 +33,19 @@ class Solution:
         return neighbors
 
     def islandPerimeter(self, grid: List[List[int]]) -> int:
-
-        ''' If a block IS land it adds to the perimeter in proportion
-            to the amount of neightbor blocks that are NOT land
-
-            1. choose block, maybe with plain nested for loop, if not land, go to adjacent until land is found
-            2. At each land
-                0. Add land to visited
-                1 Get neighbors and Count how many adjacent are NOT land and add this to perimeter
-                2. Keep track of visited, do not double visit
-                3. Go to next adjacent if there is an unvisited adjacent
-
-        '''        
+      
         perimeter = 0
-
-        for i in range(len(grid)):
-            for j in range(len(grid[0])):
-                if grid[i][j] == 1:
-                    start = (i, j)
-
+        start = self.getStart(grid)
+        visited = {start}
         queue = [start]
-        visited = set()
 
         while len(queue) > 0:
             current = queue.pop(0)
-            visited.add(current)
             neighbors = self.getNeighbors(current, grid)
             perimeter += 4 - len(neighbors)
+            # print(f'{current} adds {4- len(neighbors)} to the total perimeter')
             for neighbor in neighbors:
                 if neighbor not in visited:
                     queue.append(neighbor)
-
+                    visited.add(neighbor)
         return perimeter
