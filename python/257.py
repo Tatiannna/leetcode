@@ -10,8 +10,6 @@
 #         self.left = left
 #         self.right = right
 
-# todo
-
 class Solution:
     def binaryTreePaths(self, root: Optional[TreeNode]) -> List[str]:
 
@@ -24,13 +22,10 @@ class Solution:
 
             if not current.left and not current.right:
                 ans.append(path)
-            if current.left:
-                stack.append((current.left, path))
-            if current.right:
-                stack.append((current.right, path))
-
-        output = []
-        for s in ans:
-            output.append('->'.join(list(s)))
-
-        return output
+            else:
+                path += '->'
+                if current.left:
+                    stack.append((current.left, path))
+                if current.right:
+                    stack.append((current.right, path))
+        return ans
