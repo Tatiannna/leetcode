@@ -17,43 +17,31 @@
 class Solution:
     def minDiffInBST(self, root: Optional[TreeNode]) -> int:
 
-        min1 = float('inf')
-        min2 = float('inf')
         nums = []
+        # queue = [root] if root else []
 
-        # if min1 > min2:
-        #     temp = min1
-        #     min1 = min2
-        #     min2 = temp
+        # while len(queue) > 0:
+        #     current = queue.pop(0)
+        #     nums.append(current.val)
 
-        # print(min1, min2)
+        #     if current.left:
+        #         queue.append(current.left)
+        #     if current.right:
+        #         queue.append(current.right)
+        # nums.sort()
 
-        queue = [root] if root else []
+        def inorder(root):
+            if not root:
+                return
 
-        while len(queue) > 0:
-            current = queue.pop(0)
-            nums.append(current.val)
+            inorder(root.left)
+            nums.append(root.val)
+            inorder(root.right)
 
-            # if current.val < min2:
-            #     if current.val < min1:
-            #         min2 = min1
-            #         min1 = current.val
-            #     else:
-            #         min2 = current.val
-
-            if current.left:
-                queue.append(current.left)
-            if current.right:
-                queue.append(current.right)
-        # print( min1, min2)
-        # return min2 - min1
-
-        nums.sort()
+        inorder(root)
 
         minDistance = abs(nums[0] - nums[1])
 
         for i in range(len(nums)-1):
-            if abs(nums[i] - nums[i+1]) < minDistance:
-                minDistance = abs(nums[i] - nums[i+1])
-
+             minDistance = min(nums[i] - nums[i+1], minDistance)
         return minDistance
