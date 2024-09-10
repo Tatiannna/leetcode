@@ -8,25 +8,28 @@
 #     def __init__(self, val=0, next=None):
 #         self.val = val
 #         self.next = next
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
 class Solution:
     def insertGreatestCommonDivisors(self, head: Optional[ListNode]) -> Optional[ListNode]:
         curr = head
 
-        def get_gcd(num1, num2):
-            small = min(num1, num2)
-            ans = 1
-
-            for num in range(small, 0, -1):
+        def gcd(num1, num2):
+            for num in range(min(num1, num2), 0, -1):
                 if num1 % num == 0 and num2 % num == 0:
-                    ans = num
-            return ans
+                    return num
+            return 1
 
         while curr.next:
-            gcd = get_gcd(curr.val, curr.next.val)
-            node = ListNode(gcd)
+            print(curr.val)
+            divisor = gcd(curr.val, curr.next.val)
+            node = ListNode(divisor)
             temp = curr.next
             curr.next = node
             node.next = temp
-            curr = node
+            curr = temp
 
         return head
